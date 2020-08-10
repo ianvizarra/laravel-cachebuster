@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Str;
 
 /**
  * Knows how to generate the URL of a static asset (including a cachebuster hash) and generates absolute CDN URLs if
@@ -39,7 +40,7 @@ class AssetURLGenerator
         
             if ($md5) {
                 $parts = pathinfo($url);
-                $dirname = ends_with($parts['dirname'], '/') ? $parts['dirname'] : $parts['dirname'] . '/';
+                $dirname = Str::endsWith($parts['dirname'], '/') ? $parts['dirname'] : $parts['dirname'] . '/';
                 $url = "{$dirname}{$parts['filename']}-$md5.{$parts['extension']}";
             }
         }
@@ -95,7 +96,7 @@ class AssetURLGenerator
                     // determine the absolute path of the given URL (resolve ../ etc against the path to the css file)
                     if (substr($url, 0, 1) != '/') {
                         $abs = realpath($base . '/' . $url);
-                        if (File::exists($abs) && starts_with($abs, $public)) {
+                        if (File::exists($abs) && Str::startsWith($abs, $public)) {
                             $url = substr($abs, strlen($public));
                         }
                     }
@@ -129,18 +130,18 @@ class AssetURLGenerator
     public function map_path($url) {
         $url = '/' . preg_replace(';(^/+|#.*$);', '', $this->strip_cachebuster($url));
         foreach (Config::get('cachebuster.path_maps') as $from => $to) {
-            if (starts_with($url, $from)) {
+            if (Str::startsWith($url, $from)) {
                 $part = substr($url, strlen($from));
-                if (starts_with($part, '/')) {
+                if (Str::startsWith($part, '/')) {
                     $part = substr($part, 1);
                 }
-                if (ends_with($to, '/')) {
+                if (Str::endsWith($to, '/')) {
                     $to = substr($to, 0, strlen($to) - 1);
                 }
                 $url = $to . '/' . $part;
             }
         }
-        if (starts_with($url, '/')) {
+        if (Str::startsWith($url, '/')) {
             $url = substr($url, 1);
         }
         return $url;
