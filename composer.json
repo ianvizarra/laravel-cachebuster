@@ -1,6 +1,6 @@
 {
-    "name": "themonkeys/cachebuster",
-    "description": "Adds MD5 hashes to the URLs of your application's assets, so when they change, their URL changes.",
+    "name": "ianvizarra/cachebuster",
+    "description": "I just forked this for laravel 6 and 7 support: Adds MD5 hashes to the URLs of your application's assets, so when they change, their URL changes.",
     "homepage": "http://github.com/TheMonkeys/laravel-cachebuster",
     "keywords": ["assets", "cachebuster", "cdn", "laravel"],
     "license": "MIT",
@@ -12,8 +12,8 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "4.*|5.*",
-        "symfony/http-kernel": "2.*|3.*|4.*"
+        "illuminate/support": "4.*|5.*|6.*|7.*",
+        "symfony/http-kernel": "2.*|3.*|4.*|5.*"
     },
     "autoload": {
         "classmap": [
