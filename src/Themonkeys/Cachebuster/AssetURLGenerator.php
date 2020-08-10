@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Str;
-
+use Illuminate\Support\Str;
 /**
  * Knows how to generate the URL of a static asset (including a cachebuster hash) and generates absolute CDN URLs if
  * configured to do so.
